@@ -1,9 +1,9 @@
 void setup() {
-  // put your setup code here, to run once:
-
+  // Init functions
+  LCDinit();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
 
 }
