@@ -8,7 +8,7 @@ void increaseTimer(){
         Increase timer duration by 15 minutes
     */
     if (timerDuration < maxTime){
-        timerDuration += minutesToMiliseconds(15);
+        timerDuration += minutesToMilliseconds(15);
     }
 
     /*
@@ -23,7 +23,7 @@ void decreaseTimer(){
         Decrease timer duration by 15 minutes
     */
     if (timerDuration > 0){
-        timerDuration -= minutesToMiliseconds(15);
+        timerDuration -= minutesToMilliseconds(15);
     }
 
     /*

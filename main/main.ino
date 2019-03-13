@@ -3,6 +3,7 @@
 void setup() {
     // Init functions
     LCDinit();
+    refreshScreen();
 
 
 }
