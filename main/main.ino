@@ -1,9 +1,12 @@
+// Global Variables
+
 void setup() {
-  // Init functions
-  LCDinit();
+    // Init functions
+    LCDinit();
+
+
 }
 
 void loop() {
-  
-
+    checkTimer();
 }
