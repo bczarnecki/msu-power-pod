@@ -1,6 +1,7 @@
 #include <LiquidCrystal.h>
 
 LiquidCrystal LCD(8, 9, 4, 5, 6, 7); // Pin order matters
+bool dataChanged = true;
 const int backlight = 10;
 const byte blockChar = 0;
 const byte block[8] = {
@@ -29,16 +30,18 @@ void refreshScreen(){
     /*
         Updates the LCD screen with current information
     */
+    if (dataChanged) {
+        LCD.clear();
+        if (getPowerStatus() == true){
+            LCD.print("Power is on");
+        }
+        else {
+            LCD.print("Power is off");
+        }
 
-    /*** Dummy screen code for testing ***/
-    LCD.print("Time: 14");
-    LCD.setCursor(0,1);
-    for(int i = 0; i < 11; i++){
-        LCD.write(blockChar);
+        LCD.setCursor(0,0); // Always set back to origin when done
+        dataChanged = false;
     }
-    /*** End of dummy screen code ***/
-
-    LCD.setCursor(0,0); // Always set back to origin when done
 }
 
 void backlightOn(){
@@ -47,4 +50,8 @@ void backlightOn(){
 
 void backlightOff(){
     digitalWrite(backlight, LOW);
+}
+
+void updateScreen(){
+    dataChanged = true;
 }

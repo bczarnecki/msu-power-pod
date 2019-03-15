@@ -13,6 +13,7 @@ void increaseTimer(){
 
     /*
         TODO: play sound that matches duration
+        Update screen
     */
 
     setTimer();
@@ -28,6 +29,7 @@ void decreaseTimer(){
 
     /*
         TODO: play sound that matches duration
+        Update screen
     */
 
     setTimer();
