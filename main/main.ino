@@ -6,19 +6,18 @@
 #define SELECT_BUTTON 4
 #define NO_BUTTON 5
 
-float voltage = 0;
+
 
 void setup() {
     // Init functions
-    LCDinit();
+    lcdInit();
     powerInit();
-
-
-
+    increaseTimer();
 }
 
 void loop() {
-    readVoltage();
+    //readVoltage();
+    checkTimer();
     refreshScreen();
 
     if (readButtons() == UP_BUTTON) {

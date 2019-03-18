@@ -15,7 +15,7 @@ const byte block[8] = {
   B11111
 };
 
-void LCDinit(){
+void lcdInit(){
     /*
         Initializes LCD screen and sets cursor to 0,0
     */
@@ -32,12 +32,7 @@ void refreshScreen(){
     */
     if (dataChanged) {
         LCD.clear();
-        if (getPowerStatus() == true){
-            LCD.print("Power is on");
-        }
-        else {
-            LCD.print("Power is off");
-        }
+        LCD.print(getRemainingTimeStr());
 
         LCD.setCursor(0,0); // Always set back to origin when done
         dataChanged = false;

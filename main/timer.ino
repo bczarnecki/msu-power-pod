@@ -1,6 +1,10 @@
 const unsigned long maxTime = 7200000; // 2 hour max timer
 unsigned long startTime = 0;
 unsigned long timerDuration = 0;
+unsigned long elapsedTime = 0;
+unsigned long timeRemaining = 0;
+String previousClockTimeRemaining = "";
+String currentClockTimeRemaining = "";
 bool timerIsOn = false;
 
 void increaseTimer(){
@@ -50,13 +54,60 @@ void checkTimer(){
     */
     if (timerIsOn){
         unsigned long currentTime = millis();
-        if ((currentTime - startTime) >= timerDuration){
+        elapsedTime = currentTime - startTime;
+        timeRemaining = timerDuration - elapsedTime; // used for screen
+        if (elapsedTime >= timerDuration){
             // Turn off power
             timerIsOn = false;
+        }
+
+        // Check if screen needs to be updated, do calculations
+        currentClockTimeRemaining = millisecondsToClock(timeRemaining);
+        //currentClockTimeRemaining = (String) timeRemaining;
+        if (previousClockTimeRemaining != currentClockTimeRemaining) {
+            previousClockTimeRemaining = currentClockTimeRemaining;
+            updateScreen();
         }
     }
 }
 
-unsigned long minutesToMilliseconds(unsigned long minutes){
+unsigned long minutesToMilliseconds(const unsigned long minutes){
     return (minutes * 60 * 1000);
+}
+
+String zeroPad(const int number){
+    return "0" + (String) number;
+}
+String millisecondsToClock(const unsigned long milliseconds){
+    /*
+        convert milliseconds to a clock format for time remaining
+        returns formatted as "HH:MM:SS"
+    */
+    String result = "";
+    int seconds = (int) (milliseconds / 1000) % 60 ;
+    int minutes = (int) (milliseconds / 60000) % 60;
+    int hours = (int) (milliseconds / 3600000) % 24;
+
+    // debugging
+    /*
+    Serial.print(milliseconds/60000);
+    Serial.print('\n');
+    */
+
+    // Check if each is only one digit
+    if (hours < 10) result += zeroPad(hours);
+    else result += (String) hours;
+    result += ":";
+
+    if (minutes < 10) result += zeroPad(minutes);
+    else result += (String) minutes;
+    result += ":";
+
+    if (seconds < 10) result += zeroPad(seconds);
+    else result += (String) seconds;
+    return result;
+}
+
+String getRemainingTimeStr(){
+    return currentClockTimeRemaining;
 }
