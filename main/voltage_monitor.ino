@@ -7,6 +7,10 @@ float R1 = 30000.0;
 float R2 = 7500.0;
 int value = 0;
 
+/*
+    create lookup table for voltage vs power remaining
+*/
+
 void readVoltage()
 {
   value = analogRead(voltageSensor);
