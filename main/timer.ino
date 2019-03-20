@@ -17,7 +17,6 @@ void increaseTimer(){
 
     /*
         TODO: play sound that matches duration
-        Update screen
     */
 
     setTimer();
@@ -33,7 +32,6 @@ void decreaseTimer(){
 
     /*
         TODO: play sound that matches duration
-        Update screen
     */
 
     setTimer();
@@ -63,7 +61,6 @@ void checkTimer(){
 
         // Check if screen needs to be updated, do calculations
         currentClockTimeRemaining = millisecondsToClock(timeRemaining);
-        //currentClockTimeRemaining = (String) timeRemaining;
         if (previousClockTimeRemaining != currentClockTimeRemaining) {
             previousClockTimeRemaining = currentClockTimeRemaining;
             updateScreen();
@@ -78,6 +75,7 @@ unsigned long minutesToMilliseconds(const unsigned long minutes){
 String zeroPad(const int number){
     return "0" + (String) number;
 }
+
 String millisecondsToClock(const unsigned long milliseconds){
     /*
         convert milliseconds to a clock format for time remaining
@@ -87,12 +85,6 @@ String millisecondsToClock(const unsigned long milliseconds){
     int seconds = (int) (milliseconds / 1000) % 60 ;
     int minutes = (int) (milliseconds / 60000) % 60;
     int hours = (int) (milliseconds / 3600000) % 24;
-
-    // debugging
-    /*
-    Serial.print(milliseconds/60000);
-    Serial.print('\n');
-    */
 
     // Check if each is only one digit
     if (hours < 10) result += zeroPad(hours);
