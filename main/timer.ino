@@ -1,10 +1,11 @@
-const unsigned long maxTime = 7200000; // 2 hour max timer
+const unsigned long maxTime = 21600000; // 6 hour max timer
+const int interval = 15; // How much timer increases with button press
 unsigned long startTime = 0;
-unsigned long timerDuration = 0;
+unsigned long timerDuration = 1000; // adds extra second for display
 unsigned long elapsedTime = 0;
 unsigned long timeRemaining = 0;
 String previousClockTimeRemaining = "";
-String currentClockTimeRemaining = "";
+String currentClockTimeRemaining = "00:00:00";
 bool timerIsOn = false;
 
 void increaseTimer(){
@@ -12,37 +13,37 @@ void increaseTimer(){
         Increase timer duration by 15 minutes
     */
     if (timerDuration < maxTime){
-        timerDuration += minutesToMilliseconds(15);
+        timerDuration += minutesToMilliseconds(interval);
     }
 
     /*
         TODO: play sound that matches duration
     */
+    setTimer(); // Needs to be outside if statement
 
-    setTimer();
 }
 
 void decreaseTimer(){
     /*
         Decrease timer duration by 15 minutes
     */
-    if (timerDuration > 0){
-        timerDuration -= minutesToMilliseconds(15);
+    if (timerDuration > 1000){
+        timerDuration -= minutesToMilliseconds(interval);
+        setTimer(); // Needs to be inside if statement
     }
 
     /*
         TODO: play sound that matches duration
     */
 
-    setTimer();
+
 }
 
 void setTimer(){
     startTime = millis();
     timerIsOn = true;
-    /*
-        TODO: Turn on power
-    */
+    powerOn();
+    backlightOn();
 }
 
 void checkTimer(){
@@ -56,10 +57,13 @@ void checkTimer(){
         timeRemaining = timerDuration - elapsedTime; // used for screen
         if (elapsedTime >= timerDuration){
             // Turn off power
+            powerOff();
+            backlightOff();
             timerIsOn = false;
+            timerDuration = 1000; // Reset for next timer
         }
 
-        // Check if screen needs to be updated, do calculations
+        // Update clock string, update screen if necessary
         currentClockTimeRemaining = millisecondsToClock(timeRemaining);
         if (previousClockTimeRemaining != currentClockTimeRemaining) {
             previousClockTimeRemaining = currentClockTimeRemaining;
