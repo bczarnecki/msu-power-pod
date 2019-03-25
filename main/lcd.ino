@@ -24,6 +24,7 @@ void lcdInit(){
     LCD.setCursor(0,0);
     pinMode(backlight, OUTPUT); // pin 10 is LCD backlight
     backlightOn();
+    LCD.print("Voltage");
 }
 
 void refreshScreen(){
@@ -33,7 +34,7 @@ void refreshScreen(){
     if (dataChanged) {
         LCD.clear();
         LCD.print(getRemainingTimeStr());
-
+        
         LCD.setCursor(0,0); // Always set back to origin when done
         dataChanged = false;
     }
