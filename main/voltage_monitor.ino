@@ -13,9 +13,9 @@ int value = 0;
 
 void readVoltage()
 {
-  value = analogRead(voltageSensor);
-  vOUT = (value * 5.0) / 1024.0;
-  vIN = vOUT / (R2/(R1+R2));
+    value = analogRead(voltageSensor);
+    vOUT = (value * 5.0) / 1024.0;
+    vIN = vOUT / (R2/(R1+R2));
 }
 
 float getVoltage(){

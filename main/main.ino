@@ -7,7 +7,6 @@ void setup() {
     // Init functions
     lcdInit();
     powerInit();
-    
 }
 
 void loop() {
@@ -15,5 +14,5 @@ void loop() {
     checkTimer();
     refreshScreen();
     checkButtons();
-    
+
 }

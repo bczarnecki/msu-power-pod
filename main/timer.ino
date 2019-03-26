@@ -11,6 +11,7 @@ bool timerIsOn = false;
 void increaseTimer(){
     /*
         Increase timer duration by 15 minutes
+        TODO: increase to next highest based on remaining time?
     */
     if (timerDuration < maxTime){
         timerDuration += minutesToMilliseconds(interval);
