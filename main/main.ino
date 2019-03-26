@@ -7,11 +7,13 @@ void setup() {
     // Init functions
     lcdInit();
     powerInit();
+    
 }
 
 void loop() {
-    //readVoltage();
+    readVoltage();
     checkTimer();
     refreshScreen();
     checkButtons();
+    
 }

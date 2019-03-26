@@ -19,5 +19,6 @@ void readVoltage()
 }
 
 float getVoltage(){
+    readVoltage();
     return vIN;
 }

@@ -34,7 +34,8 @@ void refreshScreen(){
     if (dataChanged) {
         LCD.clear();
         LCD.print(getRemainingTimeStr());
-        
+        LCD.setCursor(0,1);
+        LCD.print(getVoltage());
         LCD.setCursor(0,0); // Always set back to origin when done
         dataChanged = false;
     }
