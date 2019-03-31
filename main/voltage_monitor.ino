@@ -1,5 +1,5 @@
 //Analog pin for voltage
-const int voltageSensor = A1;
+const int voltageSensor = A2;
 float vIN = 0;
 float vOUT = 0.0;
 //Voltage Divider Resistor Values
@@ -17,9 +17,7 @@ float mappedVoltage = 0.0;
 */
 
 
-void readVoltage()
-{
-<<<<<<< HEAD
+void readVoltage(){
   value = analogRead(voltageSensor);
   vOUT = (value * 5.0) / 1024.0;
   vIN = vOUT / (R2/(R1+R2));
@@ -29,22 +27,13 @@ void readVoltage()
     refreshScreen();
   }
   previousvIN = vIN;
-=======
-    value = analogRead(voltageSensor);
-    vOUT = (value * 5.0) / 1024.0;
-    vIN = vOUT / (R2/(R1+R2));
->>>>>>> 8a083d81827030db868294737b577bd5eb76c747
 }
 
 float getVoltage(){
     return vIN;
 }
 
-void mapVoltage(){
-  mappedVoltage = map(vIN,minimumVoltage,maximumVoltage,0,100);
-}
-
 float getMappedVoltage(){
-  mapVoltage();
+  mappedVoltage = map(vIN,minimumVoltage,maximumVoltage,0,100);
   return mappedVoltage;
 }

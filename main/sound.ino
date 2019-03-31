@@ -12,22 +12,8 @@
     morse code for 1 - 6 hrs
 */
 
-// Morse code
-const String ZERO = "-----";
-const String ONE = ".----";
-const String TWO = "..---";
-const String THREE = "...--";
-const String FOUR = "....-";
-const String FIVE = ".....";
-const String SIX = "-.....";
-const String SEVEN = "--...";
-const String EIGHT = "---..";
-const String NINE = "----.";
-
 //Placeholder Pin
-const int soundPin = 11;
-
-
+const int soundPin = 8;
 
 void soundInit(){
 
@@ -36,17 +22,29 @@ void soundInit(){
 
 }
 
-void activateAlarm(){
+void activateTone(){
 
   //tone(pin,frequency,duration in milliseconds)
   digitalWrite(soundPin, HIGH);
-  tone(soundPin, 2000, 500);
+  tone(soundPin, 2000, 100);
 
 }
 
-void deactivateAlarm(){
+void deactivateTone(){
 
   digitalWrite(soundPin, LOW);
   noTone(soundPin);
 
 }
+
+void getButtonSelectionSound(){
+    activateTone();
+    delay(500);
+    deactivateTone();
+  }
+
+void getWarningSound(){
+   activateTone();
+   delay(500);
+   deactivateTone();
+  }
