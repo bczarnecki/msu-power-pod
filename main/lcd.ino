@@ -33,9 +33,12 @@ void refreshScreen(){
     */
     if (dataChanged) {
         LCD.clear();
+        LCD.print("Time Left: ");
         LCD.print(getRemainingTimeStr());
         LCD.setCursor(0,1);
+        LCD.print("Voltage: ");
         LCD.print(getVoltage());
+        LCD.print(" V");
         LCD.setCursor(0,0); // Always set back to origin when done
         dataChanged = false;
     }
@@ -51,4 +54,10 @@ void backlightOff(){
 
 void updateScreen(){
     dataChanged = true;
+}
+
+void statusBar(){
+
+    LCD.clear();
+
 }

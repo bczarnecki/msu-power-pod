@@ -1,8 +1,6 @@
 // Global Variables
 
 
-
-
 void setup() {
     // Init functions
     lcdInit();
