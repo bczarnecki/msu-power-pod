@@ -12,8 +12,22 @@
     morse code for 1 - 6 hrs
 */
 
+// Morse code
+const String ZERO = "-----";
+const String ONE = ".----";
+const String TWO = "..---";
+const String THREE = "...--";
+const String FOUR = "....-";
+const String FIVE = ".....";
+const String SIX = "-.....";
+const String SEVEN = "--...";
+const String EIGHT = "---..";
+const String NINE = "----.";
+
 //Placeholder Pin
 const int soundPin = 11;
+
+
 
 void soundInit(){
 

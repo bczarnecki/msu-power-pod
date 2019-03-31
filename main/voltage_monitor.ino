@@ -19,6 +19,7 @@ float mappedVoltage = 0.0;
 
 void readVoltage()
 {
+<<<<<<< HEAD
   value = analogRead(voltageSensor);
   vOUT = (value * 5.0) / 1024.0;
   vIN = vOUT / (R2/(R1+R2));
@@ -28,6 +29,11 @@ void readVoltage()
     refreshScreen();
   }
   previousvIN = vIN;
+=======
+    value = analogRead(voltageSensor);
+    vOUT = (value * 5.0) / 1024.0;
+    vIN = vOUT / (R2/(R1+R2));
+>>>>>>> 8a083d81827030db868294737b577bd5eb76c747
 }
 
 float getVoltage(){
