@@ -12,6 +12,10 @@ float minimumVoltage = 10.3;
 float maximumVoltage = 12.7;
 float mappedVoltage = 0.0;
 
+//Timer Variables
+unsigned long voltageDelay = 5000; // milliseconds
+unsigned long previousVoltageTime = 0;
+unsigned long currentVoltageTime = 0;
 /*
     create lookup table for voltage vs power remaining
 */
@@ -24,7 +28,7 @@ void readVoltage(){
   vIN = (long)(vIN * 10) / 10.0f;
 
   if(previousvIN != vIN){
-    refreshScreen();
+      updateScreen();
   }
   previousvIN = vIN;
 }
@@ -36,4 +40,16 @@ float getVoltage(){
 float getMappedVoltage(){
   mappedVoltage = map(vIN,minimumVoltage,maximumVoltage,0,100);
   return mappedVoltage;
+}
+
+
+/*
+    Adds 5 second delay to voltage reading
+*/
+void timedVoltage(){
+    currentVoltageTime = millis();
+    if((currentVoltageTime - previousVoltageTime) > voltageDelay){
+        previousVoltageTime = millis();
+        readVoltage();
+    }
 }
