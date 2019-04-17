@@ -8,8 +8,8 @@ float R2 = 7500.0;
 int value = 0;
 float previousvIN = 0.0;
 //Battery management parameters with placeholder numbers
-float minimumVoltage = 10.3;
-float maximumVoltage = 12.7;
+float minimumVoltage = 11.0;
+float maximumVoltage = 13.5;
 float mappedVoltage = 0.0;
 
 //Timer Variables

@@ -59,10 +59,10 @@ byte DIV_1_OF_2 [8] = {
 byte DIV_2_OF_2 [8] = {
   B11111,
   B00000,
-  B11011,
-  B11011,
-  B11011,
-  B11011,
+  B11111,
+  B11111,
+  B11111,
+  B11111,
   B00000,
   B11111
 }; // Medium tank 2/2
@@ -143,10 +143,10 @@ void refreshScreen(){
         LCD.print(getRemainingTimeStr());
         LCD.setCursor(0,1);
         //LCD.print("Voltage: ");
-        //LCD.print(getVoltage());
-        statusBar();
+        //statusBar();
         LCD.print(" ");
-        LCD.print("30%");
+        LCD.print(getVoltage());
+        //LCD.print(getMappedVoltage());
         LCD.setCursor(0,0); // Always set back to origin when done
         dataChanged = false;
     }
@@ -165,9 +165,11 @@ void updateScreen(){
 }
 
 void statusBar(){
-
-  byte barColumns = map(getMappedVoltage(), 0, 100, 0, lcdColumns*2-2);
-
+    float mappedVoltage = getMappedVoltage();
+    Serial.print(mappedVoltage);
+    Serial.print('\n');
+  byte barColumns = map(mappedVoltage, 0, 100, 0, lcdColumns);
+  //Serial.print(barColumns);
   /*Draw each character of the line */
   for (byte i =  0 ; i < lcdColumns; ++ i) {
 
