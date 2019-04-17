@@ -142,11 +142,10 @@ void refreshScreen(){
         LCD.print("Time: ");
         LCD.print(getRemainingTimeStr());
         LCD.setCursor(0,1);
-        //LCD.print("Voltage: ");
-        //statusBar();
+        statusBar();
         LCD.print(" ");
-        LCD.print(getVoltage());
-        //LCD.print(getMappedVoltage());
+        LCD.print(getBatteryLevel());
+        LCD.print("%");
         LCD.setCursor(0,0); // Always set back to origin when done
         dataChanged = false;
     }
@@ -165,10 +164,8 @@ void updateScreen(){
 }
 
 void statusBar(){
-    float mappedVoltage = getMappedVoltage();
-    Serial.print(mappedVoltage);
-    Serial.print('\n');
-  byte barColumns = map(mappedVoltage, 0, 100, 0, lcdColumns);
+
+  byte barColumns = map(getBatteryLevel(), 0, 100, 0, lcdColumns*2-2);
   //Serial.print(barColumns);
   /*Draw each character of the line */
   for (byte i =  0 ; i < lcdColumns; ++ i) {

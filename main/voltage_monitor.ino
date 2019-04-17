@@ -13,9 +13,9 @@ float maximumVoltage = 13.5;
 float mappedVoltage = 0.0;
 
 //Timer Variables
-unsigned long voltageDelay = 5000; // milliseconds
-unsigned long previousVoltageTime = 0;
-unsigned long currentVoltageTime = 0;
+//unsigned long voltageDelay = 5000; // milliseconds
+//unsigned long previousVoltageTime = 0;
+//unsigned long currentVoltageTime = 0;
 /*
     create lookup table for voltage vs power remaining
 */
@@ -46,10 +46,10 @@ float getMappedVoltage(){
 /*
     Adds 5 second delay to voltage reading
 */
-void timedVoltage(){
-    currentVoltageTime = millis();
-    if((currentVoltageTime - previousVoltageTime) > voltageDelay){
-        previousVoltageTime = millis();
-        readVoltage();
-    }
-}
+// void timedVoltage(){
+//     currentVoltageTime = millis();
+//     if((currentVoltageTime - previousVoltageTime) > voltageDelay){
+//         previousVoltageTime = millis();
+//         readVoltage();
+//     }
+// }

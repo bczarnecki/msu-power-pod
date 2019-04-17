@@ -1,5 +1,5 @@
+const unsigned long oneHour = 3601000;
 const unsigned long maxTime = 21600000; // 6 hour max timer
-const int interval = 15; // How much timer increases with button press
 unsigned long startTime = 0;
 unsigned long timerDuration = 1000; // adds extra second for display
 unsigned long elapsedTime = 0;
@@ -7,14 +7,22 @@ unsigned long timeRemaining = 0;
 String previousClockTimeRemaining = "";
 String currentClockTimeRemaining = "00:00:00";
 bool timerIsOn = false;
+enum durationState {Empty, Half_hour, Full_hour};
+enum durationState currentDuration = Empty;
 
 void increaseTimer(){
     /*
         Increase timer duration by 15 minutes
         TODO: increase to next highest based on remaining time?
     */
+
     if (timerDuration < maxTime){
-        timerDuration += minutesToMilliseconds(interval);
+        if (timerDuration < oneHour){
+            timerDuration += minutesToMilliseconds(30);
+        }
+        else{
+            timerDuration += minutesToMilliseconds(60);
+        }
     }
 
     /*
@@ -29,7 +37,13 @@ void decreaseTimer(){
         Decrease timer duration by 15 minutes
     */
     if (timerDuration > 1000){
-        timerDuration -= minutesToMilliseconds(interval);
+        if (timerDuration > oneHour){
+            timerDuration -= minutesToMilliseconds(60);
+        }
+        else{
+            timerDuration -= minutesToMilliseconds(30);
+        }
+
         setTimer(); // Needs to be inside if statement
     }
 

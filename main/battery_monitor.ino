@@ -5,7 +5,6 @@ const int voltagePin = A2;
 int minVoltage = 11000;
 int maxVoltage = 13500;
 int referenceVoltage = 5000;
-float dividerRatio = 0.2;
 
 int inputVoltage = 0;
 int previousVoltage = 0;
@@ -23,7 +22,7 @@ void readVoltageUpdated(){
   Serial.print(inputVoltage);
   if(previousVoltage != inputVoltage){
     updateScreen();
-    Serial.print("Debug: Updating Screen");
+    //Serial.print("Debug: Updating Screen");
   }
   previousVoltage = inputVoltage;
 }
@@ -44,4 +43,16 @@ void showBatteryStatus() {
   Serial.print("mV (");
   Serial.print(battery.level());
   Serial.println("%)");
+}
+
+void timedVoltage(){
+    static unsigned long voltageDelay = 5000; // milliseconds
+    static unsigned long previousVoltageTime = 0;
+    static unsigned long currentVoltageTime = 0;
+
+    currentVoltageTime = millis();
+    if((currentVoltageTime - previousVoltageTime) > voltageDelay){
+        previousVoltageTime = millis();
+        readVoltageUpdated();
+    }
 }

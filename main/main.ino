@@ -5,6 +5,7 @@ void setup() {
     // Init functions
     lcdInit();
     powerInit();
+    batteryInit();
     Serial.begin(9600);
 
 }
