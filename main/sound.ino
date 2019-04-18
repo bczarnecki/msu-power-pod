@@ -1,15 +1,8 @@
-/*
- * Simple activate and deactivate alarm function
- * TODO
- * Create a range of tones for different durations
- */
-
 
 /*
-    same tone for all
-    max of 6 hours
-    short beep for 30 minutes
-    morse code for 1 - 6 hrs
+    Same tone for all time periods
+    30 mins -> 3 short beeps
+    Remaining hours -> 1 beep per hour
 */
 
 const int soundPin = 3;
@@ -18,25 +11,19 @@ bool resetTimer = false;
 int beepCount = 0;
 
 void soundInit(){
-
   pinMode(soundPin,OUTPUT);
   digitalWrite(soundPin, LOW);
-
 }
 
 void activateTone(){
-
-  //tone(pin,frequency,duration in milliseconds)
+  // tone(pin,frequency,duration in milliseconds)
   digitalWrite(soundPin, HIGH);
   tone(soundPin, 3000, 50);
-
 }
 
 void deactivateTone(){
-
   digitalWrite(soundPin, LOW);
   noTone(soundPin);
-
 }
 
 void getButtonSelectionSound(){
@@ -52,6 +39,14 @@ void getWarningSound(){
   }
 
 void checkSound(){
+    /*
+        If button is pressed, wait one second and then beep
+        the correct number of times
+
+        One second delay is non blocking so that user can continuously
+        increase the amound of time before beeps start
+    */
+    
     static unsigned long soundDelay = 1000; // milliseconds
     static unsigned long previousSoundTime = 0;
     static unsigned long currentSoundTime = 0;

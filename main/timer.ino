@@ -14,9 +14,8 @@ int numberOfBeeps = 0;
 void increaseTimer(){
     /*
         Increase timer duration by 15 minutes
-        TODO: increase to next highest based on remaining time?
+        Play the correct number of beeps
     */
-
     if (timerDuration < maxTime){
         if (timerDuration < oneHour){
             timerDuration += minutesToMilliseconds(30);
@@ -26,10 +25,6 @@ void increaseTimer(){
         }
         numberOfBeeps += 1;
     }
-
-    /*
-        TODO: play sound that matches duration
-    */
     setSound(numberOfBeeps);
     setTimer(); // Needs to be outside if statement
 
@@ -38,6 +33,7 @@ void increaseTimer(){
 void decreaseTimer(){
     /*
         Decrease timer duration by 15 minutes
+        Play the correct number of beeps
     */
     if (timerDuration > 1000){
         if (timerDuration > oneHour){
@@ -50,12 +46,6 @@ void decreaseTimer(){
         setSound(numberOfBeeps);
         setTimer(); // Needs to be inside if statement
     }
-
-    /*
-        TODO: play sound that matches duration
-    */
-
-
 }
 
 void setTimer(){

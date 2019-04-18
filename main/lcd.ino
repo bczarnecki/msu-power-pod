@@ -1,14 +1,11 @@
 #include <LiquidCrystal.h>
 
-
-
-
 LiquidCrystal LCD(8, 9, 4, 5, 6, 7); // Pin order matters
 /* Constants for LCD screen size*/
 const  int lcdRows =  2;
 const  int lcdColumns = 10 ;
 bool dataChanged = true;
-const int backlight = 10;
+const int backlight = 10; // backlight pin
 const byte blockChar = 0;
 
 /*Custom characters */
@@ -89,8 +86,6 @@ byte END_DIV_1_OF_1 [ 8 ] = {
   B11110
 }; // Char end 1/1
 
-
-
 /**
 * LCD screen setup function for the progress bar.
 * Uses custom characters from 0 to 5 (6 and 7 remain available).
@@ -107,30 +102,15 @@ void  setup_progressbar () {
   LCD.createChar ( 6 , END_DIV_1_OF_1);
 }
 
-
-//Deleted this out
-/*const byte block[8] = {
-  B11111,
-  B11111,
-  B11111,
-  B11111,
-  B11111,
-  B11111,
-  B11111,
-  B11111
-};*/
-
 void lcdInit(){
     /*
         Initializes LCD screen and sets cursor to 0,0
     */
     LCD.begin(16, 2); // 16 columns, 2 rows
-    //LCD.createChar(0, block); // create block character
     setup_progressbar();
     LCD.setCursor(0,0);
     pinMode(backlight, OUTPUT); // pin 10 is LCD backlight
     backlightOn();
-    LCD.print("Voltage");
 }
 
 void refreshScreen(){
@@ -166,7 +146,7 @@ void updateScreen(){
 void statusBar(){
 
   byte barColumns = map(getBatteryLevel(), 0, 100, 0, lcdColumns*2-2);
-  //Serial.print(barColumns);
+  
   /*Draw each character of the line */
   for (byte i =  0 ; i < lcdColumns; ++ i) {
 
