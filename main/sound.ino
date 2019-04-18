@@ -12,8 +12,10 @@
     morse code for 1 - 6 hrs
 */
 
-//Placeholder Pin
-const int soundPin = 8;
+const int soundPin = 3;
+bool makeSound = false;
+bool resetTimer = false;
+int beepCount = 0;
 
 void soundInit(){
 
@@ -26,7 +28,7 @@ void activateTone(){
 
   //tone(pin,frequency,duration in milliseconds)
   digitalWrite(soundPin, HIGH);
-  tone(soundPin, 2000, 100);
+  tone(soundPin, 3000, 50);
 
 }
 
@@ -48,3 +50,40 @@ void getWarningSound(){
    delay(500);
    deactivateTone();
   }
+
+void checkSound(){
+    static unsigned long soundDelay = 1000; // milliseconds
+    static unsigned long previousSoundTime = 0;
+    static unsigned long currentSoundTime = 0;
+
+
+    if(makeSound){
+        currentSoundTime = millis();
+        if (resetTimer) {
+            previousSoundTime = millis();
+            resetTimer = false;
+        }
+        if((currentSoundTime - previousSoundTime) > soundDelay){
+            previousSoundTime = millis();
+
+            if (beepCount == 1){
+                for (int i = 0; i < 3; i++){
+                    activateTone();
+                    delay(100);
+                }
+            }
+            for (int i = 0; i < beepCount-1; i++){
+                activateTone();
+                delay(200);
+            }
+            makeSound = false;
+        }
+    }
+
+}
+
+void setSound(int numberOfBeeps){
+    makeSound = true;
+    resetTimer = true;
+    beepCount = numberOfBeeps;
+}

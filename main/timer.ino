@@ -9,6 +9,7 @@ String currentClockTimeRemaining = "00:00:00";
 bool timerIsOn = false;
 enum durationState {Empty, Half_hour, Full_hour};
 enum durationState currentDuration = Empty;
+int numberOfBeeps = 0;
 
 void increaseTimer(){
     /*
@@ -23,11 +24,13 @@ void increaseTimer(){
         else{
             timerDuration += minutesToMilliseconds(60);
         }
+        numberOfBeeps += 1;
     }
 
     /*
         TODO: play sound that matches duration
     */
+    setSound(numberOfBeeps);
     setTimer(); // Needs to be outside if statement
 
 }
@@ -43,7 +46,8 @@ void decreaseTimer(){
         else{
             timerDuration -= minutesToMilliseconds(30);
         }
-
+        numberOfBeeps -= 1;
+        setSound(numberOfBeeps);
         setTimer(); // Needs to be inside if statement
     }
 

@@ -17,6 +17,7 @@ void loop() {
     checkTimer();
     refreshScreen();
     checkButtons();
+    checkSound();
 
     //Testing purposes for the speaker
     /*if(getVoltage() <= 10.3){
