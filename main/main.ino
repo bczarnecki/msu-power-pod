@@ -13,3 +13,5 @@ void loop() {
     checkButtons();
     checkSound();
 }
+
+void(* resetFunc) (void) = 0;

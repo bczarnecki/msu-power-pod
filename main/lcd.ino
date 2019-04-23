@@ -110,6 +110,8 @@ void lcdInit(){
     setup_progressbar();
     LCD.setCursor(0,0);
     pinMode(backlight, OUTPUT); // pin 10 is LCD backlight
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, LOW);
     backlightOn();
 }
 
@@ -143,10 +145,15 @@ void updateScreen(){
     dataChanged = true;
 }
 
+void turnScreenOff(){
+    LCD.clear();
+    backlightOff();
+}
+
 void statusBar(){
 
   byte barColumns = map(getBatteryLevel(), 0, 100, 0, lcdColumns*2-2);
-  
+
   /*Draw each character of the line */
   for (byte i =  0 ; i < lcdColumns; ++ i) {
 

@@ -1,4 +1,5 @@
 #include <Battery.h>
+#include <LowPower.h>
 
 const int voltagePin = A2;
 /* Change to millivolts */
@@ -19,7 +20,10 @@ void batteryInit(){
 
 void readVoltageUpdated(){
   inputVoltage = battery.voltage();
-  Serial.print(inputVoltage);
+  //Serial.print(inputVoltage);
+  if (inputVoltage < minVoltage){
+      powerDown();
+  }
   if(previousVoltage != inputVoltage){
     updateScreen();
     //Serial.print("Debug: Updating Screen");
@@ -55,4 +59,13 @@ void timedVoltage(){
         previousVoltageTime = millis();
         readVoltageUpdated();
     }
+}
+
+void powerDown(){
+    turnScreenOff();
+    while (inputVoltage <= minVoltage){
+        LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+        inputVoltage = battery.voltage();
+    }
+    resetFunc();
 }
