@@ -33,9 +33,13 @@ void getButtonSelectionSound(){
   }
 
 void getWarningSound(){
-   activateTone();
-   delay(500);
-   deactivateTone();
+
+    for(int i = 0; i < 5; i++){
+        digitalWrite(soundPin, HIGH);
+        tone(soundPin, 3000, 500);
+        delay(1000);
+    }
+    deactivateTone();
   }
 
 void checkSound(){
@@ -46,7 +50,7 @@ void checkSound(){
         One second delay is non blocking so that user can continuously
         increase the amound of time before beeps start
     */
-    
+
     static unsigned long soundDelay = 1000; // milliseconds
     static unsigned long previousSoundTime = 0;
     static unsigned long currentSoundTime = 0;

@@ -22,7 +22,7 @@ void readVoltageUpdated(){
   inputVoltage = battery.voltage();
   //Serial.print(inputVoltage);
   if (inputVoltage < minVoltage){
-      powerDown();
+      goToSleep();
   }
   if(previousVoltage != inputVoltage){
     updateScreen();
@@ -61,8 +61,14 @@ void timedVoltage(){
     }
 }
 
-void powerDown(){
+void goToSleep(){
+    powerOff(); // Turn off power distribution
+    getWarningSound();
     turnScreenOff();
+    /*
+        Use lowest power state and check voltage every 8s
+        if voltage is high enough, reset microcontroller
+    */
     while (inputVoltage <= minVoltage){
         LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
         inputVoltage = battery.voltage();
